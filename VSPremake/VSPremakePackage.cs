@@ -3,6 +3,8 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Windows.Forms;
+using VSPremake.Resources;
 using Task = System.Threading.Tasks.Task;
 
 namespace VSPremake
@@ -28,8 +30,7 @@ namespace VSPremake
     [Guid(VSPremakePackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
-    [ProvideOptionPage(typeof(OptionPageGrid),
-    "VSPremake", "Arguments", 0, 0, true)]
+    [ProvideOptionPage(typeof(OptionPage), "VSPremake", "Options", 0, 0, true)]
     public sealed class VSPremakePackage : AsyncPackage
     {
         /// <summary>
@@ -40,12 +41,11 @@ namespace VSPremake
         /// <summary>
         /// Options that the user can control
         /// </summary>
-        public string OptionArguments
+        public OptionPage Options
         {
             get
             {
-                OptionPageGrid page = (OptionPageGrid)GetDialogPage(typeof(OptionPageGrid));
-                return page.Arguments;
+                return (OptionPage)GetDialogPage(typeof(OptionPage));
             }
         }
 
@@ -70,20 +70,5 @@ namespace VSPremake
         #endregion
     }
 
-    /// <summary>
-    /// User interface for the args option
-    /// </summary>
-    public class OptionPageGrid : DialogPage
-    {
-        private string args = "vs2022";
-
-        [Category("VSPremake")]
-        [DisplayName("Arguments")]
-        [Description("Provide arguments for premake here")]
-        public string Arguments
-        {
-            get { return args; }
-            set { args = value; }
-        }
-    }
+    ///TODO: Add save and load for options
 }

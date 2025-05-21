@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
     <Metadata>
-        <Identity Id="VSPremake.6ff4b11d-9869-41c9-8267-ece5588ae874" Version="1.0" Language="en-US" Publisher="Colton McGraw" />
+        <Identity Id="VSPremake.6ff4b11d-9869-41c9-8267-ece5588ae874" Version="1.1" Language="en-US" Publisher="Colton McGraw" />
         <DisplayName>VSPremake</DisplayName>
-        <Description xml:space="preserve">Run Premake5 inside Visual Studio</Description>
+        <Description xml:space="preserve">Run Premake5 inside Visual Studio
+
+Please see and support the offical Premake project.
+https://premake.github.io
+
+This is an indepedent project and is not affiliated with the Premake project.</Description>
         <MoreInfo>https://github.com/ColtMcG1/VSPremake</MoreInfo>
         <License>LICENSE.txt</License>
         <GettingStartedGuide>https://github.com/ColtMcG1/VSPremake/wiki/Getting-Started</GettingStartedGuide>

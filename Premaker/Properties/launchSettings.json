@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Premaker (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Premaker (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

@@ -7,6 +7,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Task = System.Threading.Tasks.Task;
 
 namespace VSPremake
@@ -32,7 +33,7 @@ namespace VSPremake
         private readonly AsyncPackage package;
 
         /// <summary>
-        /// Location of premake.exe
+        /// Location of included premake executable.
         /// </summary>
         private string premakeExecutableLocation = string.Empty;
 
@@ -51,7 +52,9 @@ namespace VSPremake
             var menuItem = new MenuCommand(this.Execute, menuCommandID);
             commandService.AddCommand(menuItem);
 
+            //Create temp file to store premake executable.
             premakeExecutableLocation = Path.GetTempFileName();
+            //Write executable to temp file.
             File.WriteAllBytes(premakeExecutableLocation, Properties.Resources.premake5);
 
         }
@@ -122,44 +125,66 @@ namespace VSPremake
                     pane.Activate();
                     pane.Clear();
 
-                    //Need this to get user arguments
-                    VSPremakePackage package = this.package as VSPremakePackage;
+                    //Output pane acquired.
 
-                    //Need this to get the path of the premake file
-                    IVsSolution solution = (IVsSolution)Microsoft.VisualStudio.Shell.Package.GetGlobalService(typeof(IVsSolution));
-                    solution.GetSolutionInfo(out string solutionDirectory, out string solutionName, out string solutionDirectory2);
-
-                    var proc = new System.Diagnostics.Process();
-                    proc.StartInfo.CreateNoWindow = true;
-                    proc.StartInfo.RedirectStandardOutput = true;
-                    proc.StartInfo.RedirectStandardError = true;
-                    proc.StartInfo.UseShellExecute = false;
-                    proc.StartInfo.FileName = premakeExecutableLocation;
-                    proc.StartInfo.WorkingDirectory = solutionDirectory;
-                    proc.StartInfo.Arguments = package.OptionArguments;
-                    proc.Start();
-
-                    proc.OutputDataReceived += (o, args) =>
+                    try
                     {
-#pragma warning disable VSTHRD010 // Invoke single-threaded types on Main thread
-                        _ = pane.OutputStringThreadSafe(args.Data + "\n");
-#pragma warning restore VSTHRD010 // Invoke single-threaded types on Main thread
-                    };
-                    proc.ErrorDataReceived += (o, args) =>
-                    {
-#pragma warning disable VSTHRD010 // Invoke single-threaded types on Main thread
-                        _ = pane.OutputStringThreadSafe(args.Data + "\n");
-#pragma warning restore VSTHRD010 // Invoke single-threaded types on Main thread
-                    };
+                        //Need this to get user arguments
+                        VSPremakePackage package = this.package as VSPremakePackage;
 
-                    proc.BeginOutputReadLine();
-                    proc.BeginErrorReadLine();
+                        //Need this to get the path of the premake file
+                        IVsSolution solution = (IVsSolution)Microsoft.VisualStudio.Shell.Package.GetGlobalService(typeof(IVsSolution));
+                        solution.GetSolutionInfo(out string solutionDirectory, out string solutionName, out string solutionDirectory2);
+
+                        //Launch premake process with user args
+                        var proc = new System.Diagnostics.Process();
+                        proc.StartInfo.CreateNoWindow = true;
+                        proc.StartInfo.RedirectStandardOutput = true;
+                        proc.StartInfo.RedirectStandardError = true;
+                        proc.StartInfo.UseShellExecute = false;
+                        //Path to Premake executable
+                        proc.StartInfo.FileName = package.Options.ExecutableLocation == string.Empty ?  premakeExecutableLocation : package.Options.ExecutableLocation;
+                        proc.StartInfo.WorkingDirectory = solutionDirectory;
+                        //User provided commandline args. Default is "vs2022"
+                        proc.StartInfo.Arguments = package.Options.Arguments;
+                        proc.Start();
+
+                        ///
+                        /// We realastically don't need to worry about the async call to the output pane
+                        /// since no other thread will be writing data.
+                        ///
+
+                        //Write output data on process completion function
+                        proc.OutputDataReceived += (o, args) =>
+                        {
+#pragma warning disable VSTHRD010 // Invoke single-threaded types on Main thread
+                            _ = pane.OutputStringThreadSafe(args.Data + "\n");
+#pragma warning restore VSTHRD010 // Invoke single-threaded types on Main thread
+                        };
+                        //Write error data on process completion function
+                        proc.ErrorDataReceived += (o, args) =>
+                        {
+#pragma warning disable VSTHRD010 // Invoke single-threaded types on Main thread
+                            _ = pane.OutputStringThreadSafe(args.Data + "\n");
+#pragma warning restore VSTHRD010 // Invoke single-threaded types on Main thread
+                        };
+
+                        //Get process completion info, calls funciton above.
+                        proc.BeginOutputReadLine();
+                        proc.BeginErrorReadLine();
+
+                        //Dont need to wait for the exit since the process will close after completion.
+                    }
+                    catch (Exception ex)
+                    {
+                        _ = pane.OutputStringThreadSafe(ex.Message + "\n");
+                    }
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ; //TODO: Should probably alert the user if something fails, but I cant be bothered.
+                MessageBox.Show(ex.Message, "VSPremake - Error", MessageBoxButtons.OK);
             }
         }
     }
