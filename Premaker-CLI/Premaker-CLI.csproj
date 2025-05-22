@@ -10,7 +10,7 @@
     <Description>Package manager and CLI wrapper for Premake</Description>
   </PropertyGroup>
 
-  <Import Project="..\PremakerShared\PremakerShared.projitems" Label="Shared" />
+  <Import Project="..\Premaker-Library\PremakerShared.projitems" Label="Shared" />
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />

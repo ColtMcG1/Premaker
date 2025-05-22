@@ -4,10 +4,10 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-using VSPremake.Resources;
+using Premaker.Resources;
 using Task = System.Threading.Tasks.Task;
 
-namespace VSPremake
+namespace Premaker
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -27,14 +27,14 @@ namespace VSPremake
     /// </para>
     /// </remarks>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
-    [Guid(VSPremakePackage.PackageGuidString)]
+    [Guid(PremakerPackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
-    [ProvideOptionPage(typeof(OptionPage), "VSPremake", "Options", 0, 0, true)]
-    public sealed class VSPremakePackage : AsyncPackage
+    [ProvideOptionPage(typeof(OptionPage), "Premaker", "Options", 0, 0, true)]
+    public sealed class PremakerPackage : AsyncPackage
     {
         /// <summary>
-        /// VSPremakePackage GUID string.
+        /// PremakerPackage GUID string.
         /// </summary>
         public const string PackageGuidString = "5fca1048-f29c-4275-8ae0-f63e174fcf7d";
 

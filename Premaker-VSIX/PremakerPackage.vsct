@@ -22,7 +22,7 @@
 
   <!--The Commands section is where commands, menus, and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
-  <Commands package="guidVSPremakePackage">
+  <Commands package="guidPremakerPackage">
     <!-- Inside this section we have different sub-sections: one for the menus, another
     for the menu groups, one for the buttons (the actual commands), one for the combos
     and the last one for the bitmaps used. Each element is identified by a command id that
@@ -36,23 +36,23 @@
          group as the part of a menu contained between two lines. The parent of a group
          must be a menu. -->
     <Menus>
-      <Menu guid="guidVSPremakePackageCmdSet" id="PremakeToolbar" type="Toolbar" >
+      <Menu guid="guidPremakerPackageCmdSet" id="PremakeToolbar" type="Toolbar" >
         <CommandFlag>DefaultDocked</CommandFlag>
         <Strings>
-          <ButtonText>VSPremake</ButtonText>
-          <CommandName>VSPremake</CommandName>
+          <ButtonText>Premaker</ButtonText>
+          <CommandName>Premaker</CommandName>
         </Strings>
       </Menu>
     </Menus>
 
     <Groups>
-      <Group guid="guidVSPremakePackageCmdSet" id="MyMenuGroup" priority="0x0000">
-        <Parent guid="guidVSPremakePackageCmdSet" id="PremakeToolbar" />
+      <Group guid="guidPremakerPackageCmdSet" id="MyMenuGroup" priority="0x0000">
+        <Parent guid="guidPremakerPackageCmdSet" id="PremakeToolbar" />
       </Group>
-      <Group guid="guidVSPremakePackageCmdSet" id="MyMenuGroup" priority="0x0600">
+      <Group guid="guidPremakerPackageCmdSet" id="MyMenuGroup" priority="0x0600">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
       </Group>
-      <Group guid="guidVSPremakePackageCmdSet" id="MyMenuGroup" priority="0x0050">
+      <Group guid="guidPremakerPackageCmdSet" id="MyMenuGroup" priority="0x0050">
         <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_SOLNNODE"/>
       </Group>
     </Groups>
@@ -68,8 +68,8 @@
               <CommandFlag>DefaultInvisible</CommandFlag>
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
-      <Button guid="guidVSPremakePackageCmdSet" id="RunCommandId" priority="0x0100" type="Button">
-        <Parent guid="guidVSPremakePackageCmdSet" id="MyMenuGroup" />
+      <Button guid="guidPremakerPackageCmdSet" id="RunCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidPremakerPackageCmdSet" id="MyMenuGroup" />
         <Icon guid="guidIcon" id="bmpIcon" />
         <Strings>
           <ButtonText>Run Premake</ButtonText>
@@ -90,10 +90,10 @@
 
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidVSPremakePackage" value="{5fca1048-f29c-4275-8ae0-f63e174fcf7d}" />
+    <GuidSymbol name="guidPremakerPackage" value="{5fca1048-f29c-4275-8ae0-f63e174fcf7d}" />
 
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidVSPremakePackageCmdSet" value="{efa1febb-39cc-4455-8d50-1b50fe3c5e5c}">
+    <GuidSymbol name="guidPremakerPackageCmdSet" value="{efa1febb-39cc-4455-8d50-1b50fe3c5e5c}">
       <IDSymbol name="PremakeToolbar" value="0x1000" />
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="RunCommandId" value="0x0100" />

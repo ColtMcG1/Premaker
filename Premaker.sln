@@ -92,8 +92,8 @@ Global
 		SolutionGuid = {CDF2D8C5-9E9F-4047-B10B-A015619B818F}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		PremakerShared\PremakerShared.projitems*{85a4d578-1b16-49ca-97c7-1ea3607ce69d}*SharedItemsImports = 5
+		Premaker-Library\PremakerShared.projitems*{85a4d578-1b16-49ca-97c7-1ea3607ce69d}*SharedItemsImports = 5
 		Premaker-Library\PremakerShared.projitems*{d53cf54f-22a3-48d3-91e4-6ad9ddc58dc2}*SharedItemsImports = 13
-		PremakerShared\PremakerShared.projitems*{f691805e-c84f-4ec3-a1fb-e2aacc197760}*SharedItemsImports = 5
+		Premaker-Library\PremakerShared.projitems*{f691805e-c84f-4ec3-a1fb-e2aacc197760}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

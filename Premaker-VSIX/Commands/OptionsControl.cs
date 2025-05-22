@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VSPremake.Commands
+namespace Premaker.Commands
 {
     public partial class OptionsControl : UserControl
     {

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace VSPremake.Resources
+namespace Premaker.Resources
 {
     public partial class ExecutableLocationPicker : UserControl
     {

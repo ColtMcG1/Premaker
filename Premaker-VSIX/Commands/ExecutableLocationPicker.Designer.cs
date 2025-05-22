@@ -1,4 +1,4 @@
-﻿namespace VSPremake.Resources
+﻿namespace Premaker.Resources
 {
     partial class ExecutableLocationPicker
     {

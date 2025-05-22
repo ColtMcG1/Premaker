@@ -1,9 +1,9 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 using Microsoft.VisualStudio.Shell;
-using VSPremake.Resources;
+using Premaker.Resources;
 
-namespace VSPremake
+namespace Premaker
 {
 
     /// <summary>
@@ -14,7 +14,7 @@ namespace VSPremake
         //User commandline arguments
         private string args = "vs2022";
 
-        [Category("VSPremake")]
+        [Category("Premaker")]
         [DisplayName("Arguments")]
         [Description("Provide arguments for premake here.")]
         public string Arguments
@@ -26,7 +26,7 @@ namespace VSPremake
         //Location and file name of user provided
         private string execLocation = "";
 
-        [Category("VSPremake")]
+        [Category("Premaker")]
         [DisplayName("Executable Location")]
         [Description("Use a different executable.")]
         public string ExecutableLocation

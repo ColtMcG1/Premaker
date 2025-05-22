@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Task = System.Threading.Tasks.Task;
 
-namespace VSPremake
+namespace Premaker
 {
     /// <summary>
     /// Command handler
@@ -130,7 +130,7 @@ namespace VSPremake
                     try
                     {
                         //Need this to get user arguments
-                        VSPremakePackage package = this.package as VSPremakePackage;
+                        PremakerPackage package = this.package as PremakerPackage;
 
                         //Need this to get the path of the premake file
                         IVsSolution solution = (IVsSolution)Microsoft.VisualStudio.Shell.Package.GetGlobalService(typeof(IVsSolution));
@@ -184,7 +184,7 @@ namespace VSPremake
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "VSPremake - Error", MessageBoxButtons.OK);
+                MessageBox.Show(ex.Message, "Premaker - Error", MessageBoxButtons.OK);
             }
         }
     }

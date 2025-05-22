@@ -1,4 +1,4 @@
-﻿namespace VSPremake.Commands
+﻿namespace Premaker.Commands
 {
     partial class OptionsControl
     {

@@ -1,7 +1,6 @@
 ﻿using CommandLine;
 using Premaker;
 using System.Diagnostics;
-using System.Text.Json;
 
 class PremakeCLI
 {
