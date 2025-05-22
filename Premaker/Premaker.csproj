@@ -63,4 +63,5 @@
     <Title>Premaker</Title>
     <ApplicationIcon>Assets\favicon.ico</ApplicationIcon>
   </PropertyGroup>
+  <Import Project="..\PremakerShared\PremakerShared.projitems" Label="Shared" />
 </Project>

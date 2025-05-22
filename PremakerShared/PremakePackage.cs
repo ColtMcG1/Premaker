@@ -1,6 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -55,16 +53,6 @@ namespace Premaker
                 if (File.Exists(package.Path))
                 { 
                     File.Delete(package.Path); // Delete the package file if it exists
-                }
-                else
-                {
-                    var dialog = new ContentDialog
-                    {
-                        Title = "Package not found",
-                        Content = "The package file was not found. It may have been deleted manually.",
-                        CloseButtonText = "OK"
-                    };
-                    await dialog.ShowAsync();
                 }
 
                 packages.Remove(package);
