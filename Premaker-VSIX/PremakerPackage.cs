@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-using Premaker.Resources;
 using Task = System.Threading.Tasks.Task;
 
 namespace Premaker
@@ -30,7 +29,7 @@ namespace Premaker
     [Guid(PremakerPackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
-    [ProvideOptionPage(typeof(OptionPage), "Premaker", "Options", 0, 0, true)]
+    [ProvideToolWindow(typeof(PremakeManagerWindow))]
     public sealed class PremakerPackage : AsyncPackage
     {
         /// <summary>
@@ -41,13 +40,7 @@ namespace Premaker
         /// <summary>
         /// Options that the user can control
         /// </summary>
-        public OptionPage Options
-        {
-            get
-            {
-                return (OptionPage)GetDialogPage(typeof(OptionPage));
-            }
-        }
+     
 
 
         #region Package Members
@@ -65,6 +58,8 @@ namespace Premaker
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             await PremakeCommand.InitializeAsync(this);
+            await TerminalCommand.InitializeAsync(this);
+            await PremakeManagerWindowCommand.InitializeAsync(this);
         }
 
         #endregion
