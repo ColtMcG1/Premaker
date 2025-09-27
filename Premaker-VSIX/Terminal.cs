@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualStudio.PlatformUI;
+﻿using EnvDTE;
+using Microsoft.Build.Framework.XamlTypes;
+using Microsoft.VisualStudio.PlatformUI;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
@@ -11,18 +13,40 @@ namespace Premaker
 {
     internal static class Terminal
     {
+        private static string premakeExecutableLocation = string.Empty;
+        private static AsyncPackage _package;
+        public static void Install(AsyncPackage package)
+        {
 
-        public static async Task Run(string premakeExecutableLocation, AsyncPackage package, string arguments = "", bool pane = false)
+            string tempFolder = Path.GetTempPath(); 
+            string premakeExePath = Path.Combine(tempFolder, "premakemanager.exe"); // Write the premake binary to the file
+            premakeExecutableLocation = premakeExePath;
+            if (!File.Exists(premakeExePath))
+            {
+                File.WriteAllBytes(premakeExePath, Properties.Resources.premakemanager);
+            }
+            _package = package;
+
+        }
+
+        public static void Uninstall()
+        {
+            if (!string.IsNullOrEmpty(premakeExecutableLocation) && !File.Exists(premakeExecutableLocation))
+            {
+                File.Delete(premakeExecutableLocation);
+            }
+        }
+        public static async Task Run(string arguments = "", bool pane = false)
         {
             try
             {
                 if (pane)
                 {
-                    await RunToPaneAsync(premakeExecutableLocation, arguments, package);
+                    await RunToPaneAsync(premakeExecutableLocation, arguments, _package);
                 }
                 else
                 {
-                    await RunNoPaneAsync(premakeExecutableLocation, package);
+                    await RunNoPaneAsync(premakeExecutableLocation,arguments,_package);
                 }
             }
             catch (Exception ex) {
@@ -30,11 +54,11 @@ namespace Premaker
             }
         }
 
-        private static async Task RunNoPaneAsync(string premakeExecutableLocation, AsyncPackage package)
+        private static async Task RunNoPaneAsync(string premakeExecutableLocation,string arguments, AsyncPackage package)
         {
             try
             {
-                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(_package.DisposalToken);
 
                 IVsSolution solution = (IVsSolution)Package.GetGlobalService(typeof(IVsSolution));
                 solution.GetSolutionInfo(out string solutionDirectory, out _, out _);
@@ -43,17 +67,18 @@ namespace Premaker
                 {
                     FileName = premakeExecutableLocation,
                     WorkingDirectory = solutionDirectory,
-                    CreateNoWindow = true,
+                    CreateNoWindow = false,
                     LoadUserProfile = true,
                     RedirectStandardError = false,
                     RedirectStandardOutput = false,
-                    UseShellExecute = true
+                    RedirectStandardInput = false,
+                    Arguments = arguments,
+                    UseShellExecute = false
                 };
 
-                var process = new Process();
+                var process = new System.Diagnostics.Process();
                 process.StartInfo = start;
                 process.Start();
-
                 await Task.Run(() => process.WaitForExit());
             }
             catch (Exception ex)
@@ -81,14 +106,18 @@ namespace Premaker
             IVsSolution solution = (IVsSolution)Package.GetGlobalService(typeof(IVsSolution));
             solution.GetSolutionInfo(out string solutionDirectory, out _, out _);
 
-            var proc = new Process();
+            var proc = new System.Diagnostics.Process();
             proc.StartInfo.CreateNoWindow = true;
+            proc.StartInfo.RedirectStandardInput = true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.FileName = premakeExecutableLocation;
             proc.StartInfo.WorkingDirectory = solutionDirectory;
             proc.StartInfo.Arguments = arguments;
+            proc.StartInfo.StandardOutputEncoding = System.Text.Encoding.UTF8;
+            proc.StartInfo.StandardErrorEncoding = System.Text.Encoding.UTF8;
+
 
             proc.OutputDataReceived += (o, args) =>
             {

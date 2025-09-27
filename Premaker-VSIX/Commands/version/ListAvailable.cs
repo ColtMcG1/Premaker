@@ -5,20 +5,19 @@ using System.ComponentModel.Design;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Task = System.Threading.Tasks.Task;
 
-namespace Premaker
+namespace Premaker.Commands.version
 {
     /// <summary>
-    /// Command handler
+    /// Command handler to list available versions
     /// </summary>
-    internal sealed class PremakeManagerWindowCommand
+    internal sealed class ListAvailable
     {
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandId = 4131;
+        public const int CommandId = 8450;
 
         /// <summary>
         /// Command menu group (command set GUID).
@@ -31,25 +30,29 @@ namespace Premaker
         private readonly AsyncPackage package;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PremakeManagerWindowCommand"/> class.
+        /// Initializes a new instance of the <see cref="ListAvailable"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
-        private PremakeManagerWindowCommand(AsyncPackage package, OleMenuCommandService commandService)
+        private ListAvailable(AsyncPackage package, OleMenuCommandService commandService)
         {
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
 
             var menuCommandID = new CommandID(CommandSet, CommandId);
-            var menuItem = new MenuCommand(this.Execute, menuCommandID);
+            var menuItem = new OleMenuCommand(this.Execute, menuCommandID)
+            {
+                Visible = true,
+                Enabled = true,
+            };
             commandService.AddCommand(menuItem);
         }
 
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
-        public static PremakeManagerWindowCommand Instance
+        public static ListAvailable Instance
         {
             get;
             private set;
@@ -72,34 +75,28 @@ namespace Premaker
         /// <param name="package">Owner package, not null.</param>
         public static async Task InitializeAsync(AsyncPackage package)
         {
-            // Switch to the main thread - the call to AddCommand in PremakeManagerWindowCommand's constructor requires
+            // Switch to the main thread - the call to AddCommand in Command1's constructor requires
             // the UI thread.
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
             OleMenuCommandService commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
-            Instance = new PremakeManagerWindowCommand(package, commandService);
+            Instance = new ListAvailable(package, commandService);
         }
 
         /// <summary>
-        /// Shows the tool window when the menu item is clicked.
+        /// This function is the callback used to execute the command when the menu item is clicked.
+        /// See the constructor to see how the menu item is associated with this function using
+        /// OleMenuCommandService service and MenuCommand class.
         /// </summary>
-        /// <param name="sender">The event sender.</param>
-        /// <param name="e">The event args.</param>
-        private void Execute(object sender, EventArgs e)
+        /// <param name="sender">Event sender.</param>
+        /// <param name="e">Event args.</param>
+#pragma warning disable VSTHRD100 // Avoid async void methods
+        private async void Execute(object sender, EventArgs e)
+#pragma warning restore VSTHRD100 // Avoid async void methods
+
         {
-            ThreadHelper.ThrowIfNotOnUIThread();
-
-            // Get the instance number 0 of this tool window. This window is single instance so this instance
-            // is actually the only one.
-            // The last flag is set to true so that if the tool window does not exists it will be created.
-            ToolWindowPane window = this.package.FindToolWindow(typeof(PremakeManagerWindow), 0, true);
-            if ((null == window) || (null == window.Frame))
-            {
-                throw new NotSupportedException("Cannot create tool window");
-            }
-
-            IVsWindowFrame windowFrame = (IVsWindowFrame)window.Frame;
-            Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(windowFrame.Show());
+            await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            await Terminal.Run("version list --releases",true);
         }
     }
 }

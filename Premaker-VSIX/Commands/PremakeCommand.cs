@@ -57,18 +57,13 @@ namespace Premaker
             commandService.AddCommand(menuItem);
 
 
-            string tempFolder = Path.GetTempPath();
-            string premakeExePath = Path.Combine(tempFolder, "premakemanager.exe");
-            // Write the premake binary to the file
-            premakeExecutableLocation = premakeExePath;
-            File.WriteAllBytes(premakeExePath, Properties.Resources.premakemanager);
+          
 
             
         }
 
         ~PremakeCommand()
         {
-            File.Delete(premakeExecutableLocation);
         }
 
         /// <summary>
@@ -120,7 +115,7 @@ namespace Premaker
             //Ensure that we are on main thread
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
-            await Terminal.Run(premakeExecutableLocation, package);
+            await Terminal.Run();
         }
     }
 }

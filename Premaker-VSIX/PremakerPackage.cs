@@ -29,7 +29,6 @@ namespace Premaker
     [Guid(PremakerPackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
-    [ProvideToolWindow(typeof(PremakeManagerWindow))]
     public sealed class PremakerPackage : AsyncPackage
     {
         /// <summary>
@@ -57,11 +56,21 @@ namespace Premaker
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            Terminal.Install(this);
             await PremakeCommand.InitializeAsync(this);
+            await Commands.version.ListAvailable.InitializeAsync(this);
             await TerminalCommand.InitializeAsync(this);
-            await PremakeManagerWindowCommand.InitializeAsync(this);
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Terminal.Uninstall();
+            }
 
+            // Always call base
+            base.Dispose(disposing);
+        }
         #endregion
     }
 

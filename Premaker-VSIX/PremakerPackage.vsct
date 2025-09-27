@@ -23,7 +23,7 @@
 				</Strings>
 			</Menu>
 			<Menu guid="guidPremakerPackageCmdSet" id="PremakeVersionSubmenu" type="Menu">
-				<Parent guid="guidPremakerPackageCmdSet" id="PremakeSubmenu" />
+				<Parent guid="guidPremakerPackageCmdSet" id="MyMenuGroup" />
 				<Strings>
 					<ButtonText>Version</ButtonText>
 					<CommandName>Version</CommandName>
@@ -58,7 +58,7 @@
 				<Parent guid="guidPremakerPackageCmdSet" id="PremakeSubmenu" />
 			</Group>
 
-			<Group guid="guidPremakerPackageCmdSet" id="PremakeVersionSubmenuGroup" priority="0x0100">
+			<Group guid="guidPremakerPackageCmdSet" id="PremakeVersionSubmenuGroup" priority="0x0200">
 				<Parent guid="guidPremakerPackageCmdSet" id="PremakeVersionSubmenu" />
 			</Group>
 
@@ -91,11 +91,11 @@
           <ButtonText>ToolWindow1</ButtonText>
         </Strings>
       </Button>
-      <Button guid="guidPremakerPackageCmdSet" id="cmdidPremakeManagerWindowCommand" priority="0x0100" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
-        <Icon guid="guidImages1" id="bmpPic1" />
-        <Strings>
-          <ButtonText>PremakeManagerWindow</ButtonText>
+   
+      <Button guid="guidPremakerPackageCmdSet" id="cmdidVersionListAvailable" priority="0x0200" type="Button">
+        <Parent guid="guidPremakerPackageCmdSet" id="PremakeVersionSubmenuGroup" />
+		<Strings>
+			<ButtonText>List Releases</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -124,6 +124,7 @@
 			<IDSymbol name="PremakeVersionSubmenu" value="0x2100" />
 			<IDSymbol name="PremakeVersionSubmenuGroup" value="0x2101" />
 			<IDSymbol value="4131" name="cmdidPremakeManagerWindowCommand" />
+			<IDSymbol value="8450" name="cmdidVersionListAvailable" />
     </GuidSymbol>
 
 		<GuidSymbol name="guidIcon" value="{8F26FB35-30AA-4D08-AD0D-79E68119DF4B}">
@@ -140,6 +141,15 @@
     </GuidSymbol>
   
     <GuidSymbol value="{084eef42-e0fe-4494-a399-200f3ab1bed9}" name="guidImages1">
+      <IDSymbol name="bmpPic1" value="1" />
+      <IDSymbol name="bmpPic2" value="2" />
+      <IDSymbol name="bmpPicSearch" value="3" />
+      <IDSymbol name="bmpPicX" value="4" />
+      <IDSymbol name="bmpPicArrows" value="5" />
+      <IDSymbol name="bmpPicStrikethrough" value="6" />
+    </GuidSymbol>
+  
+    <GuidSymbol value="{97a7fa1c-0bb7-49c3-8207-66b49544a100}" name="guidImages2">
       <IDSymbol name="bmpPic1" value="1" />
       <IDSymbol name="bmpPic2" value="2" />
       <IDSymbol name="bmpPicSearch" value="3" />
