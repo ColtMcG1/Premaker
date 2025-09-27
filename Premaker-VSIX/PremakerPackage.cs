@@ -58,8 +58,13 @@ namespace Premaker
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
             Terminal.Install(this);
             await PremakeCommand.InitializeAsync(this);
-            await Commands.version.ListAvailable.InitializeAsync(this);
             await TerminalCommand.InitializeAsync(this);
+            await Commands.Configure.InitializeAsync(this);
+            await Commands.version.ListReleases.InitializeAsync(this);
+            await Commands.version.ListInstalled.InitializeAsync(this);
+            await Commands.version.Set.InitializeAsync(this);
+            await Commands.config.ConfigVersion.InitializeAsync(this);
+            await Commands.config.ConfigView.InitializeAsync(this);
         }
         protected override void Dispose(bool disposing)
         {

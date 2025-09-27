@@ -1,30 +1,23 @@
-﻿using EnvDTE;
-using Microsoft.Build.Framework.XamlTypes;
-using Microsoft.VisualStudio.Shell;
+﻿using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.ComponentModel.Design;
-using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Reflection;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Task = System.Threading.Tasks.Task;
 
-namespace Premaker
+namespace Premaker.Commands
 {
     /// <summary>
     /// Command handler
     /// </summary>
-    internal sealed class TerminalCommand
+    internal sealed class Configure
     {
         /// <summary>
         /// Command ID.
         /// </summary>
-        public const int CommandId = 0x0200;
+        public const int CommandId = 12548;
 
         /// <summary>
         /// Command menu group (command set GUID).
@@ -37,17 +30,12 @@ namespace Premaker
         private readonly AsyncPackage package;
 
         /// <summary>
-        /// Location of included premake executable.
-        /// </summary>
-        private string premakeExecutableLocation = string.Empty;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PremakeCommand"/> class.
+        /// Initializes a new instance of the <see cref="Configure"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
-        private TerminalCommand(AsyncPackage package, OleMenuCommandService commandService)
+        private Configure(AsyncPackage package, OleMenuCommandService commandService)
         {
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
@@ -57,14 +45,10 @@ namespace Premaker
             commandService.AddCommand(menuItem);
         }
 
-        ~TerminalCommand()
-        {
-        }
-
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
-        public static TerminalCommand Instance
+        public static Configure Instance
         {
             get;
             private set;
@@ -87,12 +71,12 @@ namespace Premaker
         /// <param name="package">Owner package, not null.</param>
         public static async Task InitializeAsync(AsyncPackage package)
         {
-            // Switch to the main thread - the call to AddCommand in PremakeCommand's constructor requires
+            // Switch to the main thread - the call to AddCommand in Configure's constructor requires
             // the UI thread.
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
             OleMenuCommandService commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
-            Instance = new TerminalCommand(package, commandService);
+            Instance = new Configure(package, commandService);
         }
 
         /// <summary>
@@ -109,7 +93,7 @@ namespace Premaker
 
             //Ensure that we are on main thread
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
-            await Terminal.Run("--interactive");
+            await Terminal.Run("configure");
         }
     }
 }

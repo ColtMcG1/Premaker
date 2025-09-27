@@ -22,11 +22,20 @@
 					<CommandName>Premake</CommandName>
 				</Strings>
 			</Menu>
+			
 			<Menu guid="guidPremakerPackageCmdSet" id="PremakeVersionSubmenu" type="Menu">
 				<Parent guid="guidPremakerPackageCmdSet" id="MyMenuGroup" />
 				<Strings>
 					<ButtonText>Version</ButtonText>
 					<CommandName>Version</CommandName>
+				</Strings>
+			</Menu>
+			
+			<Menu guid="guidPremakerPackageCmdSet" id="PremakeConfigSubmenu" type="Menu">
+				<Parent guid="guidPremakerPackageCmdSet" id="MyMenuGroup" />
+				<Strings>
+					<ButtonText>Config</ButtonText>
+					<CommandName>Config</CommandName>
 				</Strings>
 			</Menu>
 
@@ -49,7 +58,6 @@
 			</Group>
 
 			<!-- View menu group for your Tool Window -->
-			<!-- FIX: Use a new unique group id (e.g. MyToolWindowGroup) instead of reusing MyMenuGroup -->
 			<Group guid="guidPremakerPackageCmdSet" id="MyToolWindowGroup" priority="0x0600">
 				<Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_VIEW" />
 			</Group>
@@ -62,7 +70,10 @@
 				<Parent guid="guidPremakerPackageCmdSet" id="PremakeVersionSubmenu" />
 			</Group>
 
-
+			<Group guid="guidPremakerPackageCmdSet" id="PremakeConfigSubmenuGroup" priority="0x0200">
+				<Parent guid="guidPremakerPackageCmdSet" id="PremakeConfigSubmenu" />
+			</Group>
+		
 		</Groups>
 
 		<Buttons>
@@ -84,25 +95,60 @@
 					<ButtonText>Premake Terminal</ButtonText>
 				</Strings>
 			</Button>
-		  <Button guid="guidPremakerPackageCmdSet" id="cmdidToolWindow1Command" priority="0x0100" type="Button">
-        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1" />
-        <Icon guid="guidImages" id="bmpPic1" />
-        <Strings>
-          <ButtonText>ToolWindow1</ButtonText>
-        </Strings>
-      </Button>
-   
+		  
+   	  <!-- Premake Version buttons-->
       <Button guid="guidPremakerPackageCmdSet" id="cmdidVersionListAvailable" priority="0x0200" type="Button">
         <Parent guid="guidPremakerPackageCmdSet" id="PremakeVersionSubmenuGroup" />
+		 <Icon guid="guidIcon" id="bmpIcon" />
 		<Strings>
 			<ButtonText>List Releases</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidPremakerPackageCmdSet" id="cmdidListInstalled" priority="0x0100" type="Button">
+        <Parent guid="guidPremakerPackageCmdSet" id="PremakeVersionSubmenuGroup" />
+		<Icon guid="guidIcon" id="bmpIcon" />
+        <Strings>
+          <ButtonText>List Installed</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidPremakerPackageCmdSet" id="cmdidVersionSet" priority="0x0100" type="Button">
+        <Parent guid="guidPremakerPackageCmdSet" id="PremakeVersionSubmenuGroup" />
+		<Icon guid="guidIcon" id="bmpIcon" />
+        <Strings>
+          <ButtonText>Set</ButtonText>
+        </Strings>
+      </Button>
+			
+	   	  <!-- Premake Version buttons-->
+
+      <Button guid="guidPremakerPackageCmdSet" id="cmdidConfigVersion" priority="0x0100" type="Button">
+        <Parent guid="guidPremakerPackageCmdSet" id="PremakeConfigSubmenuGroup" />
+		<Icon guid="guidIcon" id="bmpIcon" />
+        <Strings>
+          <ButtonText>Set Version</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidPremakerPackageCmdSet" id="cmdidConfigView" priority="0x0100" type="Button">
+        <Parent guid="guidPremakerPackageCmdSet" id="PremakeConfigSubmenuGroup" />
+		<Icon guid="guidIcon" id="bmpIcon" />
+        <Strings>
+          <ButtonText>View</ButtonText>
+        </Strings>
+      </Button>
+			
+	   	  <!-- Premake Module buttons-->
+
+      <Button guid="guidPremakerPackageCmdSet" id="cmdidConfigure" priority="0x0100" type="Button">
+        <Parent guid="guidPremakerPackageCmdSet" id="MyMenuGroup" />
+		<Icon guid="guidIcon" id="bmpIcon" />
+        <Strings>
+          <ButtonText>Configure</ButtonText>
         </Strings>
       </Button>
     </Buttons>
 
 		<Bitmaps>
 			<Bitmap guid="guidIcon" href="Resources\favicon.ico" usedList="bmpIcon" />
-      <Bitmap guid="guidImages1" href="Resources\PremakeManagerWindowCommand.png" usedList="bmpPic1, bmpPic2, bmpPicSearch, bmpPicX, bmpPicArrows, bmpPicStrikethrough" />
     </Bitmaps>
 
 	</Commands>
@@ -118,45 +164,29 @@
 			<IDSymbol name="RunCommandId" value="0x0100" />
 			<IDSymbol name="PremakeTerminalCommandId" value="0x0200" />
 			<IDSymbol value="4130" name="cmdidToolWindow1Command" />
+			
 			<IDSymbol name="PremakeSubmenu" value="0x2000" />
 			<IDSymbol name="PremakeSubmenuGroup" value="0x2001" />
 
 			<IDSymbol name="PremakeVersionSubmenu" value="0x2100" />
 			<IDSymbol name="PremakeVersionSubmenuGroup" value="0x2101" />
+			
+			<IDSymbol name="PremakeConfigSubmenu" value="0x3100" />
+			<IDSymbol name="PremakeConfigSubmenuGroup" value="0x3101" />
+			
 			<IDSymbol value="4131" name="cmdidPremakeManagerWindowCommand" />
 			<IDSymbol value="8450" name="cmdidVersionListAvailable" />
+			<IDSymbol value="8451" name="cmdidListInstalled" />
+			<IDSymbol value="8452" name="cmdidVersionSet" />
+		    <IDSymbol value="12546" name="cmdidConfigVersion" />
+		    <IDSymbol value="12547" name="cmdidConfigView" />
+      <IDSymbol value="12548" name="cmdidConfigure" />
     </GuidSymbol>
 
 		<GuidSymbol name="guidIcon" value="{8F26FB35-30AA-4D08-AD0D-79E68119DF4B}">
 			<IDSymbol name="bmpIcon" value="1" />
 		</GuidSymbol>
-	
-    <GuidSymbol value="{0b936da1-7d6e-4abd-a2c1-8d2d7316549e}" name="guidImages">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
-    </GuidSymbol>
   
-    <GuidSymbol value="{084eef42-e0fe-4494-a399-200f3ab1bed9}" name="guidImages1">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
-    </GuidSymbol>
-  
-    <GuidSymbol value="{97a7fa1c-0bb7-49c3-8207-66b49544a100}" name="guidImages2">
-      <IDSymbol name="bmpPic1" value="1" />
-      <IDSymbol name="bmpPic2" value="2" />
-      <IDSymbol name="bmpPicSearch" value="3" />
-      <IDSymbol name="bmpPicX" value="4" />
-      <IDSymbol name="bmpPicArrows" value="5" />
-      <IDSymbol name="bmpPicStrikethrough" value="6" />
-    </GuidSymbol>
   </Symbols>
 
 </CommandTable>

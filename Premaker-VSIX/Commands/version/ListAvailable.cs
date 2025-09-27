@@ -12,7 +12,7 @@ namespace Premaker.Commands.version
     /// <summary>
     /// Command handler to list available versions
     /// </summary>
-    internal sealed class ListAvailable
+    internal sealed class ListReleases
     {
         /// <summary>
         /// Command ID.
@@ -30,12 +30,12 @@ namespace Premaker.Commands.version
         private readonly AsyncPackage package;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ListAvailable"/> class.
+        /// Initializes a new instance of the <see cref="ListReleases"/> class.
         /// Adds our command handlers for menu (commands must exist in the command table file)
         /// </summary>
         /// <param name="package">Owner package, not null.</param>
         /// <param name="commandService">Command service to add command to, not null.</param>
-        private ListAvailable(AsyncPackage package, OleMenuCommandService commandService)
+        private ListReleases(AsyncPackage package, OleMenuCommandService commandService)
         {
             this.package = package ?? throw new ArgumentNullException(nameof(package));
             commandService = commandService ?? throw new ArgumentNullException(nameof(commandService));
@@ -52,7 +52,7 @@ namespace Premaker.Commands.version
         /// <summary>
         /// Gets the instance of the command.
         /// </summary>
-        public static ListAvailable Instance
+        public static ListReleases Instance
         {
             get;
             private set;
@@ -80,7 +80,7 @@ namespace Premaker.Commands.version
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
 
             OleMenuCommandService commandService = await package.GetServiceAsync(typeof(IMenuCommandService)) as OleMenuCommandService;
-            Instance = new ListAvailable(package, commandService);
+            Instance = new ListReleases(package, commandService);
         }
 
         /// <summary>
