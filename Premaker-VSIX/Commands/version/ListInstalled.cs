@@ -87,7 +87,7 @@ namespace Premaker.Commands.version
         /// <param name="sender">Event sender.</param>
         /// <param name="e">Event args.</param>
         #pragma warning disable VSTHRD100 // Avoid async void methods
-        private async void  Execute(object sender, EventArgs e)
+        private async void Execute(object sender, EventArgs e)
 #pragma warning restore VSTHRD100 // Avoid async void methods
 
         {

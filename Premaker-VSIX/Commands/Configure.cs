@@ -85,7 +85,7 @@ namespace Premaker.Commands
         /// OleMenuCommandService service and MenuCommand class.
         /// </summary>
         /// <param name="sender">Event sender.</param>
-        /// <param name="e">Event args.</param>
+        /// <param name="e">Event args</param>
 #pragma warning disable VSTHRD100 // Avoid async void methods
         private async void Execute(object sender, EventArgs e)
 #pragma warning restore VSTHRD100 // Avoid async void methods

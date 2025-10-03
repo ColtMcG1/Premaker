@@ -78,7 +78,7 @@ namespace Premaker
 
         public static void Uninstall()
         {
-            if (!string.IsNullOrEmpty(premakeExecutableLocation) && !File.Exists(premakeExecutableLocation))
+            if (!string.IsNullOrEmpty(premakeExecutableLocation) && File.Exists(premakeExecutableLocation))
             {
                 File.Delete(premakeExecutableLocation);
             }
@@ -141,7 +141,7 @@ namespace Premaker
             var outputWindow = Package.GetGlobalService(typeof(SVsOutputWindow)) as IVsOutputWindow;
             if (outputWindow == null) return;
 
-            arguments.ThrowIfNullOrEmpty("arguments can not be empty when using output pane");
+            arguments.ThrowIfNullOrEmpty("arguments cannot be empty when using output pane");
 
             var paneGuid = new Guid("519B77C0-1DCC-4561-AB6C-3181A1B75A6C");
             
