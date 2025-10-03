@@ -5,7 +5,10 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,10 +24,54 @@ namespace Premaker
             string tempFolder = Path.GetTempPath(); 
             string premakeExePath = Path.Combine(tempFolder, "premakemanager.exe"); // Write the premake binary to the file
             premakeExecutableLocation = premakeExePath;
-            if (!File.Exists(premakeExePath))
+
+           
+            bool overwrite = false;
+
+            if (File.Exists(premakeExePath))
             {
-                File.WriteAllBytes(premakeExePath, Properties.Resources.premakemanager);
+                try
+                {
+                    byte[] existingBytes = File.ReadAllBytes(premakeExePath);
+
+                    using (SHA256 sha = SHA256.Create())
+                    {
+                        //compute the hashes.
+                        byte[] resourceHash = sha.ComputeHash(Properties.Resources.premakemanager);
+                        byte[] existingHash = sha.ComputeHash(existingBytes);
+
+                        overwrite = !resourceHash.SequenceEqual(existingHash);
+                    }
+                }
+                catch
+                {
+                    overwrite = true;
+                }
             }
+
+            if (overwrite)
+            {
+                try
+                {
+                    File.Delete(premakeExePath);
+                    File.WriteAllBytes(premakeExePath, Properties.Resources.premakemanager);
+                } 
+                catch(Exception e)
+                {
+                    string message = string.Format(CultureInfo.CurrentCulture, "Unable to update premake manager cli (check taskmanager)");
+                    string title = "Unable to Install terminal";
+
+                    // Show a message box to prove we were here
+                    VsShellUtilities.ShowMessageBox(
+                        package,
+                        message,
+                        title,
+                        OLEMSGICON.OLEMSGICON_INFO,
+                        OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                        OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST);
+                }
+            }
+
             _package = package;
 
         }
@@ -108,7 +155,6 @@ namespace Premaker
 
             var proc = new System.Diagnostics.Process();
             proc.StartInfo.CreateNoWindow = true;
-            proc.StartInfo.RedirectStandardInput = true;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.RedirectStandardError = true;
             proc.StartInfo.UseShellExecute = false;

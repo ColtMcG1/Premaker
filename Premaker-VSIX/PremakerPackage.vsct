@@ -39,6 +39,14 @@
 				</Strings>
 			</Menu>
 
+			<Menu guid="guidPremakerPackageCmdSet" id="PremakeModuleSubmenu" type="Menu">
+				<Parent guid="guidPremakerPackageCmdSet" id="MyMenuGroup" />
+				<Strings>
+					<ButtonText>Module</ButtonText>
+					<CommandName>Module</CommandName>
+				</Strings>
+			</Menu>
+
 		</Menus>
 
 		<Groups>
@@ -72,6 +80,10 @@
 
 			<Group guid="guidPremakerPackageCmdSet" id="PremakeConfigSubmenuGroup" priority="0x0200">
 				<Parent guid="guidPremakerPackageCmdSet" id="PremakeConfigSubmenu" />
+			</Group>
+
+			<Group guid="guidPremakerPackageCmdSet" id="PremakeModuleSubmenuGroup" priority="0x0200">
+				<Parent guid="guidPremakerPackageCmdSet" id="PremakeModuleSubmenu" />
 			</Group>
 		
 		</Groups>
@@ -133,7 +145,7 @@
 		<Icon guid="guidIcon" id="bmpIcon" />
         <Strings>
           <ButtonText>View</ButtonText>
-        </Strings>
+		</Strings>
       </Button>
 			
 	   	  <!-- Premake Module buttons-->
@@ -143,6 +155,28 @@
 		<Icon guid="guidIcon" id="bmpIcon" />
         <Strings>
           <ButtonText>Configure</ButtonText>
+		</Strings>
+      </Button>
+      <Button guid="guidPremakerPackageCmdSet" id="cmdidInfo" priority="0x0100" type="Button">
+        <Parent guid="guidPremakerPackageCmdSet" id="PremakeModuleSubmenuGroup" />
+        <Icon guid="guidIcon" id="bmpIcon" />
+        <Strings>
+          <ButtonText>Info</ButtonText>
+        </Strings>
+		
+      </Button>
+      <Button guid="guidPremakerPackageCmdSet" id="cmdidAdd" priority="0x0100" type="Button">
+        <Parent guid="guidPremakerPackageCmdSet" id="PremakeModuleSubmenuGroup" />
+		  <Icon guid="guidIcon" id="bmpIcon" />
+        <Strings>
+          <ButtonText>Add</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidPremakerPackageCmdSet" id="cmdidInstall" priority="0x0100" type="Button">
+        <Parent guid="guidPremakerPackageCmdSet" id="PremakeModuleSubmenuGroup" />
+		 <Icon guid="guidIcon" id="bmpIcon" />
+		 <Strings>
+			<ButtonText>Install</ButtonText>
         </Strings>
       </Button>
     </Buttons>
@@ -173,20 +207,26 @@
 			
 			<IDSymbol name="PremakeConfigSubmenu" value="0x3100" />
 			<IDSymbol name="PremakeConfigSubmenuGroup" value="0x3101" />
-			
+
+			<IDSymbol name="PremakeModuleSubmenu" value="0x4100" />
+			<IDSymbol name="PremakeModuleSubmenuGroup" value="0x4101" />
+
 			<IDSymbol value="4131" name="cmdidPremakeManagerWindowCommand" />
 			<IDSymbol value="8450" name="cmdidVersionListAvailable" />
 			<IDSymbol value="8451" name="cmdidListInstalled" />
 			<IDSymbol value="8452" name="cmdidVersionSet" />
 		    <IDSymbol value="12546" name="cmdidConfigVersion" />
 		    <IDSymbol value="12547" name="cmdidConfigView" />
-      <IDSymbol value="12548" name="cmdidConfigure" />
+			<IDSymbol value="12548" name="cmdidConfigure" />
+			<IDSymbol value="12549" name="cmdidInfo" />
+		  <IDSymbol value="16642" name="cmdidAdd" />
+		  <IDSymbol value="16643" name="cmdidInstall" />
     </GuidSymbol>
 
 		<GuidSymbol name="guidIcon" value="{8F26FB35-30AA-4D08-AD0D-79E68119DF4B}">
 			<IDSymbol name="bmpIcon" value="1" />
 		</GuidSymbol>
-  
+ 
   </Symbols>
 
 </CommandTable>

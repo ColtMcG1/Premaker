@@ -65,6 +65,9 @@ namespace Premaker
             await Commands.version.Set.InitializeAsync(this);
             await Commands.config.ConfigVersion.InitializeAsync(this);
             await Commands.config.ConfigView.InitializeAsync(this);
+            await Commands.module.Info.InitializeAsync(this);
+            await Commands.module.Add.InitializeAsync(this);
+            await Premaker.Commands.module.Install.InitializeAsync(this);
         }
         protected override void Dispose(bool disposing)
         {
