@@ -24,9 +24,8 @@ namespace Premaker
             string tempFolder = Path.GetTempPath(); 
             string premakeExePath = Path.Combine(tempFolder, "premakemanager.exe"); // Write the premake binary to the file
             premakeExecutableLocation = premakeExePath;
-
            
-            bool overwrite = false;
+            bool overwrite = false; // If file exists, check if we need to overwrite it. Else assume the file needs to be written.
 
             if (File.Exists(premakeExePath))
             {
@@ -45,8 +44,11 @@ namespace Premaker
                 }
                 catch
                 {
-                    overwrite = true;
                 }
+            }
+            else
+            {
+                File.WriteAllBytes(premakeExePath, Properties.Resources.premakemanager);
             }
 
             if (overwrite)
@@ -55,8 +57,8 @@ namespace Premaker
                 {
                     File.Delete(premakeExePath);
                     File.WriteAllBytes(premakeExePath, Properties.Resources.premakemanager);
-                } 
-                catch(Exception e)
+                }
+                catch (Exception)
                 {
                     string message = string.Format(CultureInfo.CurrentCulture, "Unable to update premake manager cli (check taskmanager)");
                     string title = "Unable to Install terminal";
