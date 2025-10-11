@@ -16,44 +16,6 @@ Premaker is available as three buildable projects targeting:
 This ensures compatibility with a wide range of Visual Studio and .NET environments.
 
 --- 
-## Standalone Application
-### Features
-- It allows you to run Premake project files for your solution.
-- Use can select the version of Premake you want to use.
-- You can change and save the arguments you want to pass to Premake in the options.
-
-### Future Features & Functionality
-- It can be used to generate Premake project files.
-
---- 
-## Command Line Interface
-### Features
-You can use all the same features as the standalone application, but from the command line.
-
-### How To Use It
-```bash
-premaker [options] [args]
-```
-### Options
-```bash
---package, -p  Specify the package to use (premake5.x-beta0.x)
---version, -v  Specify the version of Premake to use
---list <releases, packages>, -l <releases, packages> List available or installed premake versions
---download, -d   Download premake
---remove, -r    Remove premake
-```
-
-### Examples
-```bash
-premaker --package premake5.0-beta1 vs2022
-```
-```bash
-premaker -v 00000000 vs2022
-```
-```bash
-premaker --list releases
-```
---- 
 ## Visual Studio Extension
 ### Getting Started
 - Click install
@@ -77,3 +39,5 @@ premaker --list releases
 
 [Find it on the Microsoft Marketplace here](https://marketplace.visualstudio.com/items?itemName=ColtonMcGraw.VSPremake)
 --- 
+
+## Contibutors (Coming Soon)
