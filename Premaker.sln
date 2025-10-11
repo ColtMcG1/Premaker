@@ -8,13 +8,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12911394-1413-499F-AE66-9E67E30399F8}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
+		Terminal.cs = Terminal.cs
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Premaker-Standalone", "Premaker-Standalone\Premaker-Standalone.csproj", "{85A4D578-1B16-49CA-97C7-1EA3607CE69D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Premaker-CLI", "Premaker-CLI\Premaker-CLI.csproj", "{F691805E-C84F-4EC3-A1FB-E2AACC197760}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Premaker-Library", "Premaker-Library\Premaker-Library.shproj", "{D53CF54F-22A3-48D3-91E4-6AD9DDC58DC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,56 +39,11 @@ Global
 		{571DBD72-82A3-4A2D-A39C-BDB331158C77}.Release|x64.Build.0 = Release|Any CPU
 		{571DBD72-82A3-4A2D-A39C-BDB331158C77}.Release|x86.ActiveCfg = Release|x86
 		{571DBD72-82A3-4A2D-A39C-BDB331158C77}.Release|x86.Build.0 = Release|x86
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|Any CPU.Build.0 = Debug|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|Any CPU.Deploy.0 = Debug|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|arm64.ActiveCfg = Debug|ARM64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|arm64.Build.0 = Debug|ARM64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|arm64.Deploy.0 = Debug|ARM64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|x64.ActiveCfg = Debug|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|x64.Build.0 = Debug|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|x64.Deploy.0 = Debug|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|x86.ActiveCfg = Debug|x86
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|x86.Build.0 = Debug|x86
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Debug|x86.Deploy.0 = Debug|x86
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|Any CPU.ActiveCfg = Release|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|Any CPU.Build.0 = Release|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|Any CPU.Deploy.0 = Release|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|arm64.ActiveCfg = Release|ARM64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|arm64.Build.0 = Release|ARM64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|arm64.Deploy.0 = Release|ARM64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|x64.ActiveCfg = Release|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|x64.Build.0 = Release|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|x64.Deploy.0 = Release|x64
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|x86.ActiveCfg = Release|x86
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|x86.Build.0 = Release|x86
-		{85A4D578-1B16-49CA-97C7-1EA3607CE69D}.Release|x86.Deploy.0 = Release|x86
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Debug|arm64.Build.0 = Debug|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Debug|x64.Build.0 = Debug|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Debug|x86.Build.0 = Debug|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Release|arm64.ActiveCfg = Release|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Release|arm64.Build.0 = Release|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Release|x64.ActiveCfg = Release|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Release|x64.Build.0 = Release|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Release|x86.ActiveCfg = Release|Any CPU
-		{F691805E-C84F-4EC3-A1FB-E2AACC197760}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CDF2D8C5-9E9F-4047-B10B-A015619B818F}
-	EndGlobalSection
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Premaker-Library\PremakerShared.projitems*{85a4d578-1b16-49ca-97c7-1ea3607ce69d}*SharedItemsImports = 5
-		Premaker-Library\PremakerShared.projitems*{d53cf54f-22a3-48d3-91e4-6ad9ddc58dc2}*SharedItemsImports = 13
-		Premaker-Library\PremakerShared.projitems*{f691805e-c84f-4ec3-a1fb-e2aacc197760}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

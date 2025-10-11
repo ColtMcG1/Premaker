@@ -63,9 +63,9 @@ namespace Premaker.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] premake5 {
+        internal static byte[] premakemanager {
             get {
-                object obj = ResourceManager.GetObject("premake5", resourceCulture);
+                object obj = ResourceManager.GetObject("premakemanager", resourceCulture);
                 return ((byte[])(obj));
             }
         }

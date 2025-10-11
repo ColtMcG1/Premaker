@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
-using Premaker.Resources;
 using Task = System.Threading.Tasks.Task;
 
 namespace Premaker
@@ -30,7 +29,6 @@ namespace Premaker
     [Guid(PremakerPackage.PackageGuidString)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
-    [ProvideOptionPage(typeof(OptionPage), "Premaker", "Options", 0, 0, true)]
     public sealed class PremakerPackage : AsyncPackage
     {
         /// <summary>
@@ -41,13 +39,7 @@ namespace Premaker
         /// <summary>
         /// Options that the user can control
         /// </summary>
-        public OptionPage Options
-        {
-            get
-            {
-                return (OptionPage)GetDialogPage(typeof(OptionPage));
-            }
-        }
+     
 
 
         #region Package Members
@@ -64,9 +56,29 @@ namespace Premaker
             // When initialized asynchronously, the current thread may be a background thread at this point.
             // Do any initialization that requires the UI thread after switching to the UI thread.
             await this.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            Terminal.Install(this);
             await PremakeCommand.InitializeAsync(this);
+            await TerminalCommand.InitializeAsync(this);
+            await Commands.Configure.InitializeAsync(this);
+            await Commands.version.ListReleases.InitializeAsync(this);
+            await Commands.version.ListInstalled.InitializeAsync(this);
+            await Commands.version.Set.InitializeAsync(this);
+            await Commands.config.ConfigVersion.InitializeAsync(this);
+            await Commands.config.ConfigView.InitializeAsync(this);
+            await Commands.module.Info.InitializeAsync(this);
+            await Commands.module.Add.InitializeAsync(this);
+            await Premaker.Commands.module.Install.InitializeAsync(this);
         }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                Terminal.Uninstall();
+            }
 
+            // Always call base
+            base.Dispose(disposing);
+        }
         #endregion
     }
 

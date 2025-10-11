@@ -1,0 +1,3 @@
+[submodule "premake-manager-cli"]
+	path = premake-manager-cli
+	url = https://github.com/lolrobbe2/premake-manager-cli.git
