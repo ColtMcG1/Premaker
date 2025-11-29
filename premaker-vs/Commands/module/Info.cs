@@ -94,7 +94,7 @@ namespace Premaker.Commands.module
             InputDialog dialog = new InputDialog("Enter module identifier <GithubLink> or <owner/repository>", "Module Identifier","");
             if (dialog.ShowDialog() == true && !string.IsNullOrEmpty(dialog.InputText))
             {
-                await Terminal.Run($"module info {dialog.InputText}",true);
+                await Terminal.RunAsync($"module info {dialog.InputText}",true);
             }
         }
     }

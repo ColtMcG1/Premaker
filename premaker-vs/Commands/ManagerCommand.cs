@@ -109,7 +109,7 @@ namespace Premaker
 
             //Ensure that we are on main thread
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
-            await Terminal.Run("--interactive");
+            await Terminal.RunAsync("--interactive");
         }
     }
 }

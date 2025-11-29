@@ -85,7 +85,7 @@ namespace Premaker
                 File.Delete(premakeExecutableLocation);
             }
         }
-        public static async Task Run(string arguments = "", bool pane = false)
+        public static async Task RunAsync(string arguments = "", bool pane = false)
         {
             try
             {

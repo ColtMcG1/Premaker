@@ -93,7 +93,7 @@ namespace Premaker.Commands
 
             //Ensure that we are on main thread
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync(package.DisposalToken);
-            await Terminal.Run("configure");
+            await Terminal.RunAsync("configure");
         }
     }
 }

@@ -92,7 +92,7 @@ namespace Premaker.Commands.version
 
         {
             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
-            await Terminal.Run("version set");
+            await Terminal.RunAsync("version set");
         }
     }
 }

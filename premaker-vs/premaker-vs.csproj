@@ -53,6 +53,7 @@
     <Compile Include="Commands\module\Add.cs" />
     <Compile Include="Commands\module\Info.cs" />
     <Compile Include="Commands\module\Install.cs" />
+    <Compile Include="LanguageClient\PremakeLanguageClient.cs" />
     <Compile Include="utility\InputDialog.cs" />
     <Compile Include="Commands\version\ListAvailable.cs" />
     <Compile Include="Commands\version\ListInstalled.cs" />

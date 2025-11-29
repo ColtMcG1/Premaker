@@ -27,7 +27,45 @@
       {
         "command": "premaker.helloWorld",
         "title": "Premaker: Hello World"
+      },
+      {
+        "command": "premaker.runScript",
+        "title": "Premaker: Run Premake Script",
+        "category": "Premaker"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "premaker.runScript",
+          "when": "resourceFilename == premake.lua || resourceFilename == premake5.lua",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Premaker Configuration",
+      "properties": {
+        "premaker.executable": {
+          "type": "string",
+          "default": "premake5",
+          "description": "Executable used to run premake scripts (e.g. premake5, premake).",
+          "scope": "window"
+        },
+        "premaker.fileArg": {
+          "type": "string",
+          "default": "--file",
+          "description": "Argument used to specify the premake script file (commonly '--file'). Leave empty to pass the path as a positional argument.",
+          "scope": "window"
+        },
+        "premaker.extraArgs": {
+          "type": "string",
+          "default": "",
+          "description": "Extra arguments appended to the premake command (e.g. '--os=windows').",
+          "scope": "window"
+        }
+      }
+    }
   }
 }
