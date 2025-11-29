@@ -1,0 +1,33 @@
+{
+  "name": "premaker-vscode",
+  "displayName": "Premaker",
+  "description": "Premaker VS Code extension (empty scaffold)",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -w -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5",
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.75.0",
+    "@vscode/vsce": "^2.10.1"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "premaker.helloWorld",
+        "title": "Premaker: Hello World"
+      }
+    ]
+  }
+}
